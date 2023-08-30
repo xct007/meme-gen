@@ -3,7 +3,7 @@
  */
 import * as Jimp from "jimp";
 import * as gm from "gm";
-import { Options } from "./utils.js";
+import { Options } from "./utils/index.js";
 export class memeG extends Options {
     mimetype = Jimp.MIME_PNG;
     _gm;

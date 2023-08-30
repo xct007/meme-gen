@@ -2,7 +2,7 @@
  * @author FrierenDv
  */
 /// <reference types="node" />
-import { Options } from "./utils.js";
+import { Options } from "./utils/index.js";
 export declare class memeG extends Options {
     private mimetype;
     private _gm;

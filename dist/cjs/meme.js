@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.memeG = void 0;
 const Jimp = require("jimp");
 const gm = require("gm");
-const utils_1 = require("./utils");
-class memeG extends utils_1.Options {
+const index_1 = require("./utils/index");
+class memeG extends index_1.Options {
     mimetype = Jimp.MIME_PNG;
     _gm;
     image_buffer;

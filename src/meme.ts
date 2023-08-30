@@ -5,7 +5,7 @@
 import * as Jimp from "jimp";
 import * as gm from "gm";
 
-import { Options } from "./utils";
+import { Options } from "./utils/index";
 
 export class memeG extends Options {
 	private mimetype: string = Jimp.MIME_PNG;
