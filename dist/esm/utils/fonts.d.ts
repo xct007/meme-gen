@@ -1,1 +1,1 @@
-export declare const FONT_IMPACT: string;
+export declare const FONT_IMPACT = "./impact.ttf";

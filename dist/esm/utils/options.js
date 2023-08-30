@@ -36,7 +36,7 @@ export class Options extends Util {
      */
     load_font(path = FONT_IMPACT) {
         if (!existsSync(path)) {
-            throw new Error(path);
+            throw new Error("Path font not set");
         }
         this.font = path;
         return this;
