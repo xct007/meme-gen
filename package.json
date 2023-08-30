@@ -1,0 +1,64 @@
+{
+	"name": "meme-gen",
+	"version": "1.0.0",
+	"description": "Create meme using graphics magick",
+	"exports": {
+		".": {
+			"import": "./dist/esm/index.js",
+			"types": "./dist/@types/index.d.ts",
+			"require": "./dist/cjs/index.js"
+		}
+	},
+	"types": "./dist/@types/index.d.ts",
+	"main": "./dist/cjs/index.js",
+	"scripts": {
+		"clean": "rimraf ./dist",
+		"lint:fix": "eslint src/**/*.ts --fix",
+		"build:esm": "tsc -p tsconfig.esm.json",
+		"build:cjs": "tsc -p tsconfig.cjs.json",
+		"build:types": "tsc -p tsconfig.types.json",
+		"fix": "fix-esm-import-path dist/esm",
+		"build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types && npm run fix",
+		"prepare": "npm run build:all && node scripts/write-package.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/xct007/meme-gen.git"
+	},
+	"keywords": [
+		"meme-gen",
+		"meme-gen-node",
+		"meme-generator"
+	],
+	"author": "FrierenDv",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/xct007/meme-gen/issues"
+	},
+	"homepage": "https://github.com/xct007/meme-gen#readme",
+	"dependencies": {
+		"gm": "^1.25.0",
+		"jimp": "^0.22.10"
+	},
+	"devDependencies": {
+		"@types/gm": "^1.25.1",
+		"@types/node": "^20.5.7",
+		"@typescript-eslint/eslint-plugin": "^6.5.0",
+		"@typescript-eslint/parser": "^6.5.0",
+		"eslint": "^8.48.0",
+		"fix-esm-import-path": "^1.4.0",
+		"rimraf": "^5.0.1",
+		"typescript": "^5.2.2"
+	},
+	"directories": {
+		"dist": "dist",
+		"src": "src",
+		"scripts": "scripts"
+	},
+	"files": [
+		"dist/**/*.js",
+		"dist/**/*.d.ts",
+		"dist/**/package.json",
+		"scripts/*"
+	]
+}
