@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 // Source: https://github.com/puppeteer/puppeteer/blob/main/typescript-if-required.js
 // https://gtihub.com/BochilTeam/scraper/master/blob/scripts/compile-typescript.js
 const child_process = require("child_process");
