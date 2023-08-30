@@ -16,7 +16,7 @@ const fileExists = async (filePath) =>
 const libPath = path.join(__dirname, "../dist");
 
 async function compileTypeScript() {
-	const out = await exec("npm run build").catch((error) => {
+	const out = await exec("npm run build:all").catch((error) => {
 		console.error(error);
 		process.exit(1);
 	});
