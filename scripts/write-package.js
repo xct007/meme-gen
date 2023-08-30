@@ -12,7 +12,7 @@ const fileExists = async (filePath) =>
 const libPath = path.join(__dirname, "../dist");
 
 const font_name = "impact.ttf";
-const font_path = path.join(__dirname, "../src/utils", font_name);
+const font_path = path.join(__dirname, font_name);
 const font_url =
 	"https://github.com/xct007/meme-gen/raw/main/src/utils/impact.ttf";
 
