@@ -51,7 +51,7 @@ yarn add github:xct007/meme-gen
 
     // local path
     meme.image("./danil_strok.jpg");
-    
+
     // using url 
     meme.image("https://example.com/image.jpg");
 
@@ -104,7 +104,7 @@ yarn add github:xct007/meme-gen
         .top("OMG")
         .bottom("I love you")
         .upper_case()
-        .bufferAsync()
+        .getBufferAsync()
     
     console.log(image_buffer);
     ```
