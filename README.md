@@ -100,7 +100,7 @@ yarn add github:xct007/meme-gen
         .load_font("./my_font.ttf")
         .fill("#FFF")
         .stroke("#000", 2)
-        .padding(40)
+        .padding_width(40)
         .top("OMG")
         .bottom("I love you")
         .upper_case()

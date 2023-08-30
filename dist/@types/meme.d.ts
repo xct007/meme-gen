@@ -16,7 +16,7 @@ export declare class memeG extends Options {
      * create the meme and return buffer
      * @returns {Promise<Buffer>}
      */
-    getBufferAync(): Promise<Buffer>;
+    getBufferAsync(): Promise<Buffer>;
     /**
      *
      * @param {string} path - path output image

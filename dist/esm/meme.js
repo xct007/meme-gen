@@ -1,8 +1,8 @@
 /**
  * @author FrierenDv
  */
-import * as Jimp from "jimp";
-import * as gm from "gm";
+import Jimp from "jimp";
+import gm from "gm";
 import { Options } from "./utils/index.js";
 export class memeG extends Options {
     mimetype = Jimp.MIME_PNG;
@@ -75,7 +75,7 @@ export class memeG extends Options {
      * create the meme and return buffer
      * @returns {Promise<Buffer>}
      */
-    async getBufferAync() {
+    async getBufferAsync() {
         if (!this.image_buffer) {
             await this._Jimp_init();
         }

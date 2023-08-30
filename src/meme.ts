@@ -2,8 +2,8 @@
  * @author FrierenDv
  */
 
-import * as Jimp from "jimp";
-import * as gm from "gm";
+import Jimp from "jimp";
+import gm from "gm";
 
 import { Options } from "./utils/index";
 
@@ -90,7 +90,7 @@ export class memeG extends Options {
 	 * create the meme and return buffer
 	 * @returns {Promise<Buffer>}
 	 */
-	public async getBufferAync(): Promise<Buffer> {
+	public async getBufferAsync(): Promise<Buffer> {
 		if (!this.image_buffer) {
 			await this._Jimp_init();
 		}

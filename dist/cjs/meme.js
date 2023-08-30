@@ -4,22 +4,22 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.memeG = void 0;
-const Jimp = require("jimp");
-const gm = require("gm");
+const jimp_1 = require("jimp");
+const gm_1 = require("gm");
 const index_1 = require("./utils/index");
 class memeG extends index_1.Options {
-    mimetype = Jimp.MIME_PNG;
+    mimetype = jimp_1.default.MIME_PNG;
     _gm;
     image_buffer;
     // TODO: use another method to get image from url.
     async _Jimp_init() {
         let _jimp;
         try {
-            _jimp = await Jimp.read(this.init_image);
+            _jimp = await jimp_1.default.read(this.init_image);
         }
         catch {
             _jimp = await new Promise((resolve, reject) => {
-                new Jimp(512, 512, (err, image) => {
+                new jimp_1.default(512, 512, (err, image) => {
                     if (err)
                         return reject(err);
                     image.scan(0, 0, image.bitmap.width, image.bitmap.height, function (x, y, idx) {
@@ -40,7 +40,7 @@ class memeG extends index_1.Options {
             return;
         }
         if (Buffer.isBuffer(this.image_buffer)) {
-            this._gm = gm(this.image_buffer);
+            this._gm = (0, gm_1.default)(this.image_buffer);
         }
         else {
             throw new Error("image_buffer is not a Buffer");
@@ -78,7 +78,7 @@ class memeG extends index_1.Options {
      * create the meme and return buffer
      * @returns {Promise<Buffer>}
      */
-    async getBufferAync() {
+    async getBufferAsync() {
         if (!this.image_buffer) {
             await this._Jimp_init();
         }
