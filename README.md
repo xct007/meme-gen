@@ -49,6 +49,9 @@ yarn add github:xct007/meme-gen
 
     const meme = new memeG();
 
+    // local path
+    meme.image("./danil_strok.jpg");
+    
     // using url 
     meme.image("https://example.com/image.jpg");
 
