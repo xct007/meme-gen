@@ -17,9 +17,9 @@
 		"build:esm": "tsc -p tsconfig.esm.json",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
 		"build:types": "tsc -p tsconfig.types.json",
-		"fix": "fix-esm-import-path dist/esm",
-		"build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types && npm run fix",
-		"prepare": "npm run build:all && node scripts/write-package.js"
+		"fix:esm": "fix-esm-import-path dist/esm",
+		"build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
+		"prepare": "npm run build:all && node scripts/write-package.js && npm run fix:esm"
 	},
 	"repository": {
 		"type": "git",
