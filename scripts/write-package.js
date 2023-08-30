@@ -17,7 +17,7 @@ const font_url =
 	"https://github.com/xct007/meme-gen/raw/main/src/utils/impact.ttf";
 
 async function writePackageJson() {
-	await execSync(`curl -o "${font_path}" "${font_url}"`);
+	execSync(`curl -o "${font_path}" "${font_url}"`);
 	const libExists = await fileExists(libPath);
 	if (!libExists) {
 		console.error("Dist folder not found after compiling TypeScript");
