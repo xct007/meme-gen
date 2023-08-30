@@ -14,12 +14,13 @@
 	"scripts": {
 		"clean": "rimraf ./dist",
 		"lint:fix": "eslint src/**/*.ts --fix",
-		"build:esm": "tsc -p tsconfig.esm.json",
+		"build:esm": "tsc -p tsconfig.esm.json && npm run fix:esm",
 		"build:cjs": "tsc -p tsconfig.cjs.json",
 		"build:types": "tsc -p tsconfig.types.json",
-		"fix:esm": "fix-esm-import-path dist/esm",
 		"build:all": "npm run clean && npm run build:esm && npm run build:cjs && npm run build:types",
-		"prepare": "npm run build:all && node scripts/write-package.js && npm run fix:esm"
+		"fix:esm": "fix-esm-import-path dist/esm",
+		"build": "npm run build:all && node scripts/write-package.js",
+		"prepare": "npm run build"
 	},
 	"repository": {
 		"type": "git",
