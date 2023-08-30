@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { execSync } = require("child_process");
 
 const { promisify } = require("util");
 const fsAccess = promisify(fs.access);
@@ -12,8 +13,11 @@ const libPath = path.join(__dirname, "../dist");
 
 const font_name = "impact.ttf";
 const font_path = path.join(__dirname, "../src/utils", font_name);
+const font_url =
+	"https://github.com/xct007/meme-gen/raw/main/src/utils/impact.ttf";
 
 async function writePackageJson() {
+	execSync(`curl -o ${font_path} "${font_url}"`);
 	const libExists = await fileExists(libPath);
 	if (!libExists) {
 		console.error("Dist folder not found after compiling TypeScript");
