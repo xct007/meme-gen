@@ -5,12 +5,12 @@
 import Jimp from "jimp";
 import gm from "gm";
 
-import { Options } from "./utils/index";
+import { Options, FONT_IMPACT } from "./utils/index";
 
 export class memeG extends Options {
-	private mimetype: string = Jimp.MIME_PNG;
-	private _gm!: gm.State;
-	private image_buffer!: Buffer;
+	protected mimetype: string = Jimp.MIME_PNG;
+	protected _gm!: gm.State;
+	protected image_buffer!: Buffer;
 
 	// TODO: use another method to get image from url.
 	private async _Jimp_init(): Promise<void> {
@@ -40,7 +40,7 @@ export class memeG extends Options {
 		this.width = _jimp.bitmap.width;
 		this.height = _jimp.bitmap.height;
 	}
-	private _gm_init(): void {
+	protected _gm_init(): void {
 		if (this._gm) {
 			return;
 		}
@@ -50,12 +50,12 @@ export class memeG extends Options {
 			throw new Error("image_buffer is not a Buffer");
 		}
 	}
-	private _draw_top(top_position: number, topFontSize: number): void {
+	protected _draw_top(top_position: number, topFontSize: number): void {
 		this._gm.font(this.font, topFontSize);
 		this._gm.gravity("North");
 		this._gm.drawText(0, top_position, this.top_text, "center");
 	}
-	private _draw_bottom(
+	protected _draw_bottom(
 		bottom_position: number,
 		bottomFontSize: number,
 	): void {
@@ -64,12 +64,12 @@ export class memeG extends Options {
 		this._gm.drawText(0, bottom_position, this.bottom_text, "center");
 	}
 
-	private _draw(): void {
+	protected _draw(): void {
 		if (!this._gm) {
 			this._gm_init();
 		}
 		if (!this.font) {
-			this.load_font();
+			this.load_font(FONT_IMPACT);
 		}
 		if (!this._stroke) {
 			this.stroke();

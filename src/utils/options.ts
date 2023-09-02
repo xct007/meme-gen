@@ -1,6 +1,6 @@
 import { Util } from "./util";
 import { existsSync } from "fs";
-import { FONT_IMPACT } from "./fonts";
+export { FONT_IMPACT } from "./fonts";
 
 export class Options extends Util {
 	/**
@@ -36,7 +36,7 @@ export class Options extends Util {
 	 * @param {string} path - font path
 	 * @returns
 	 */
-	public load_font(path: string = FONT_IMPACT): this {
+	public load_font(path: string): this {
 		if (!existsSync(path)) {
 			throw new Error("Path font not set");
 		}
