@@ -7,10 +7,11 @@ import gm from "gm";
 
 import { Options, FONT_IMPACT } from "./utils/index";
 
-export class memeG extends Options {
+class memeG extends Options {
 	protected mimetype: string = Jimp.MIME_PNG;
 	protected _gm!: gm.State;
 	protected image_buffer!: Buffer;
+	static FONT_IMPACT: string;
 
 	// TODO: use another method to get image from url.
 	private async _Jimp_init(): Promise<void> {
@@ -129,3 +130,5 @@ export class memeG extends Options {
 		});
 	}
 }
+memeG.FONT_IMPACT = FONT_IMPACT;
+export { memeG };
