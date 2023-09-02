@@ -5,29 +5,34 @@
 import Jimp from "jimp";
 import gm from "gm";
 
-import { Options, FONT_IMPACT } from "./utils/index";
+import { Options } from "./utils/index";
 
-class memeG extends Options {
+export class memeG extends Options {
 	protected mimetype: string = Jimp.MIME_PNG;
 	protected _gm!: gm.State;
 	protected image_buffer!: Buffer;
-	static FONT_IMPACT: string;
 
-	// TODO: use another method to get image from url.
-	private async _Jimp_init(): Promise<void> {
+	//
+	/**
+	 * TODO: use another method to get image from url instead using jimp
+	 * TODO: use another method to create image instead using new Jimp
+	 * @description init jimp
+	 * @returns {Promise<void>}
+	 */
+	protected async _Jimp_init(): Promise<void> {
 		let _jimp: Jimp;
 		try {
 			_jimp = await Jimp.read(this.init_image);
 		} catch {
 			_jimp = await new Promise((resolve, reject) => {
-				new Jimp(512, 512, (err, image) => {
+				new Jimp(this.width, this.height, (err, image) => {
 					if (err) return reject(err);
 					image.scan(
 						0,
 						0,
 						image.bitmap.width,
 						image.bitmap.height,
-						function (x, y, idx) {
+						function (_x, _y, idx) {
 							this.bitmap.data[idx] = 0;
 							this.bitmap.data[idx + 1] = 0;
 							this.bitmap.data[idx + 2] = 0;
@@ -41,6 +46,10 @@ class memeG extends Options {
 		this.width = _jimp.bitmap.width;
 		this.height = _jimp.bitmap.height;
 	}
+	/**
+	 * @description init gm
+	 * @returns {void}
+	 */
 	protected _gm_init(): void {
 		if (this._gm) {
 			return;
@@ -51,26 +60,41 @@ class memeG extends Options {
 			throw new Error("image_buffer is not a Buffer");
 		}
 	}
-	protected _draw_top(top_position: number, topFontSize: number): void {
-		this._gm.font(this.font, topFontSize);
+	/**
+	 * @description calculate top text position
+	 * @param {number} top_position - top position
+	 * @param {number} top_font_size - font size
+	 * @returns {void}
+	 */
+	protected _draw_top(top_position: number, top_font_size: number): void {
+		this._gm.font(this.font, top_font_size);
 		this._gm.gravity("North");
 		this._gm.drawText(0, top_position, this.top_text, "center");
 	}
+	/**
+	 * @description calculate font size for bottom text
+	 * @param {number} bottom_position - bottom position
+	 * @param {number} bottom_font_size - font size
+	 * @returns {void}
+	 */
 	protected _draw_bottom(
 		bottom_position: number,
-		bottomFontSize: number,
+		bottom_font_size: number,
 	): void {
-		this._gm.font(this.font, bottomFontSize);
+		this._gm.font(this.font, bottom_font_size);
 		this._gm.gravity("South");
 		this._gm.drawText(0, bottom_position, this.bottom_text, "center");
 	}
-
+	/**
+	 * @description calculate top text position
+	 * @returns {void}
+	 */
 	protected _draw(): void {
 		if (!this._gm) {
 			this._gm_init();
 		}
 		if (!this.font) {
-			this.load_font(FONT_IMPACT);
+			this.load_font();
 		}
 		if (!this._stroke) {
 			this.stroke();
@@ -88,7 +112,7 @@ class memeG extends Options {
 		);
 	}
 	/**
-	 * create the meme and return buffer
+	 * @description create the meme and return buffer
 	 * @returns {Promise<Buffer>}
 	 */
 	public async getBufferAsync(): Promise<Buffer> {
@@ -109,11 +133,11 @@ class memeG extends Options {
 	}
 
 	/**
-	 *
+	 * @description create the meme and write to file
 	 * @param {string} path - path output image
-	 * @returns {void}
+	 * @returns {string} path
 	 */
-	public async writeAsync(path: string): Promise<void> {
+	public async writeAsync(path: string): Promise<string> {
 		if (!this.image_buffer) {
 			await this._Jimp_init();
 		}
@@ -124,11 +148,9 @@ class memeG extends Options {
 					console.error("Error:", err);
 					reject(err);
 				} else {
-					resolve();
+					resolve(path);
 				}
 			});
 		});
 	}
 }
-memeG.FONT_IMPACT = FONT_IMPACT;
-export { memeG };

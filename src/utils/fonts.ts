@@ -1,4 +1,7 @@
 import { join } from "path";
 
-const __dirname = process.cwd();
+/**
+ * @description The path to the Impact font.
+ * @type {string}
+ */
 export const FONT_IMPACT = join(__dirname, "impact.ttf");

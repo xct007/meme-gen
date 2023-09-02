@@ -18,7 +18,7 @@ const font_url =
 	"https://github.com/xct007/meme-gen/raw/main/src/utils/impact.ttf";
 
 async function writePackageJson() {
-	execSync(`curl -o "${font_path}" "${font_url}"`);
+	execSync(`curl -L -o "${font_path}" "${font_url}"`);
 	const libExists = await fileExists(libPath);
 	if (!libExists) {
 		console.error("Dist folder not found after compiling TypeScript");
@@ -28,14 +28,16 @@ async function writePackageJson() {
 	const libCjsExists = await fileExists(libCjs);
 	if (libCjsExists) {
 		const packageJson = JSON.stringify({ type: "commonjs" }, null, 2);
-		await fs.promises.writeFile(
-			path.join(libCjs, "package.json"),
-			packageJson,
-		);
-		await fs.promises.copyFile(
-			font_path,
-			path.join(libCjs, "utils", font_name),
-		);
+		await Promise.all([
+			fs.promises.writeFile(
+				path.join(libCjs, "package.json"),
+				packageJson,
+			),
+			fs.promises.copyFile(
+				font_path,
+				path.join(libCjs, "utils", font_name),
+			),
+		]);
 	} else {
 		console.warn("CJS folder not found");
 	}
@@ -43,29 +45,39 @@ async function writePackageJson() {
 	const libEsmExists = await fileExists(libEsm);
 	if (libEsmExists) {
 		const packageJson = JSON.stringify({ type: "module" }, null, 2);
-		await fs.promises.writeFile(
-			path.join(libEsm, "package.json"),
-			packageJson,
-		);
-		await fs.promises.copyFile(
-			font_path,
-			path.join(libEsm, "utils", font_name),
-		);
+		await Promise.all([
+			fs.promises.writeFile(
+				path.join(libEsm, "package.json"),
+				packageJson,
+			),
+			fs.promises.writeFile(
+				path.join(libEsm, "utils", "fonts.js"),
+				esm_fonts_export(),
+			),
+			fs.promises.copyFile(
+				font_path,
+				path.join(libEsm, "utils", font_name),
+			),
+		]);
 	} else {
 		console.warn("ESM folder not found");
 	}
 
 	const typesPath = path.join(libPath, "@types");
 	const typesExists = await fileExists(typesPath);
-	await fs.promises.copyFile(
-		font_path,
-		path.join(typesPath, "utils", font_name),
-	);
 	if (!typesExists && !libEsmExists && !libCjsExists) {
 		console.error("No compiled TypeScript files found");
 		process.exit(1);
 	}
 	await fs.promises.unlink(font_path);
 }
+function esm_fonts_export() {
+	return `import { fileURLToPath } from "url";
+import { join, dirname } from "path";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+export const FONT_IMPACT = join(__dirname, "impact.ttf");`;
+}
 if (require.main === module) writePackageJson();

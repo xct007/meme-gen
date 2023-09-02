@@ -1,2 +1,2 @@
 export * from "./options";
-export * from "./fonts";
+export * from "./fonts.js";

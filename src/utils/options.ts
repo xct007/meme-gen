@@ -1,10 +1,10 @@
+import { FONT_IMPACT } from "./fonts.js";
 import { Util } from "./util";
 import { existsSync } from "fs";
-export { FONT_IMPACT } from "./fonts";
 
 export class Options extends Util {
 	/**
-	 * top text meme
+	 * @description top text meme
 	 * @param {string} top_text - input top text
 	 * @returns
 	 */
@@ -12,9 +12,8 @@ export class Options extends Util {
 		this.top_text = top_text;
 		return this;
 	}
-
 	/**
-	 * bottom text meme
+	 * @description bottom text meme
 	 * @param {string} bottom_text - input bottom text
 	 * @returns
 	 */
@@ -23,7 +22,7 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * make text top and bottom upper case
+	 * @description make text top and bottom upper case
 	 * @returns
 	 */
 	public upper_case(): this {
@@ -32,11 +31,11 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * load custom font
+	 * @description load custom font
 	 * @param {string} path - font path
 	 * @returns
 	 */
-	public load_font(path: string): this {
+	public load_font(path: string = FONT_IMPACT): this {
 		if (!existsSync(path)) {
 			throw new Error("Path font not set");
 		}
@@ -44,7 +43,7 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * image use for creating meme, if not set will use blank white 512x412
+	 * @description image use for creating meme, if not set will use blank white 512x412
 	 * @param {string} init_image - image url/path or buffer
 	 * @returns
 	 */
@@ -53,7 +52,7 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * set fill text color
+	 * @description set fill text color
 	 * @param {string} hex_color - hex color
 	 * @returns
 	 */
@@ -62,7 +61,7 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * set stroke color and width
+	 * @description set stroke color and width
 	 * @param {string} hex_color - hex color
 	 * @param {number} stroke_width - stroke width
 	 * @returns
@@ -73,7 +72,7 @@ export class Options extends Util {
 		return this;
 	}
 	/**
-	 * Set padding width
+	 * @description set padding width
 	 * @param {number} size - padding size
 	 * @returns
 	 */
