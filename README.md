@@ -56,7 +56,7 @@ yarn add github:xct007/meme-gen
     meme.image("https://example.com/image.jpg");
 
     // buffer
-    const image_buffer = readFilSync("./danil.jpg")
+    const image_buffer = readFileSync("./danil.jpg")
     meme.image(image_buffer)
 
     // by default it will use white blank image
