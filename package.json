@@ -39,7 +39,7 @@
 	"homepage": "https://github.com/xct007/meme-gen#readme",
 	"dependencies": {
 		"gm": "^1.25.0",
-		"jimp": "^0.22.10"
+		"jimp": "^1.0.2"
 	},
 	"devDependencies": {
 		"@types/gm": "^1.25.1",
